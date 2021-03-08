@@ -1,0 +1,29 @@
+{{template "base" .}}
+
+{{define "title"}}Home{{end}}
+
+{{define "body"}}
+    <h2>List of Books</h2>
+    {{if .Books}}
+        <table>
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Created</th>
+                <th>ID</th>
+            </tr>
+            </thead>
+            {{range .Books}}
+                <tr>
+
+                    <td><a href='/book/{{.ID}}'>{{.Title}}</a></td>
+
+                    <td>{{humanDate .Created}}</td>
+                    <td>{{.ID}}</td>
+                </tr>
+            {{end}}
+        </table>
+    {{else}}
+        <p>There's nothing to see here yet!</p>
+    {{end}}
+{{end}}
