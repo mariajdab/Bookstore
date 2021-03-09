@@ -31,7 +31,7 @@ func (m *BookModel) Get(id int) (*models.Book, error) {
 
 	s := &models.Book{}
 
-	err := m.DB.QueryRow(`SELECT id, title, content, created, expires FROM snippets
+	err := m.DB.QueryRow(`SELECT id, title, content, created, expires FROM books
 			 WHERE expires > UTC_TIMESTAMP() AND id = ?`, id).Scan(&s.ID, &s.Title, &s.Content, &s.Created, &s.Expires)
 
 	if err == sql.ErrNoRows {
@@ -44,7 +44,7 @@ func (m *BookModel) Get(id int) (*models.Book, error) {
 }
 
 func (m *BookModel) ListBooks() ([]*models.Book, error) {
-	stmt := `SELECT id, title, content, created, expires FROM snippets 
+	stmt := `SELECT id, title, content, created, expires FROM books 
 			WHERE expires > UTC_TIMESTAMP() ORDER BY created DESC LIMIT 10`
 
 	rows, err := m.DB.Query(stmt)
