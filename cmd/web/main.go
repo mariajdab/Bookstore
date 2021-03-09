@@ -9,6 +9,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 )
 
 type application struct {
@@ -50,7 +51,7 @@ func main() {
 		Addr:     *addr,
 		ErrorLog: errorLog,
 		Handler:  app.routes(),
-	        WriteTimeout: 15 * time.Second,
+		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,
 	}
 
